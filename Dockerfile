@@ -49,6 +49,7 @@ RUN mkdir -p /etc/apache2/modsecurity.d/ && \
 
 RUN cd /etc/apache2/modsecurity.d/  && \
     mv /opt/ModSecurity/modsecurity.conf-recommended /etc/apache2/modsecurity.d/modsecurity.conf && \
+    sed -i "/SecRuleEngine /c\#SecRuleEngine DetectionOnly" /etc/apache2/modsecurity.d/modsecurity.conf && \
     echo include modsecurity.conf >> /etc/apache2/modsecurity.d/include.conf && \
     git clone https://github.com/SpiderLabs/owasp-modsecurity-crs owasp-crs && \
     mv /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf && \
